@@ -22,3 +22,7 @@ What do you want to say?
 Create a "that" action based on Webhooks service
 URL (replace with your public IP and web server port used by Flask):
     XXX.XXX.XXX.XXX:YYYY/brightnessColor?led=NumberField&color=TextField
+
+
+
+https://dordnung.de/raspberrypi-ledstrip/
