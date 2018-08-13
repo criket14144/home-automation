@@ -1,0 +1,51 @@
+#!usr/bin/python
+from time import sleep
+import RPi.GPIO as GPIO
+ 
+ORANGE_LED = 17
+WHITE_LED = 27
+ 
+from flask import (
+    Flask,
+    render_template,
+    request,
+)
+ 
+GPIO.setmode(GPIO.BCM)
+ 
+GPIO.setup(17, GPIO.OUT)
+GPIO.setup(27, GPIO.OUT)
+ 
+app = Flask(__name__)
+ 
+@app.route('/levelColor', methods=['GET', 'POST'])
+ 
+#/levelColor?color=orange&level=50
+ 
+def setLevelColor():
+    pin = 0
+    color = request.values['color']
+   
+    if color.lower().__contains__("orange"):
+        pin = ORANGE_LED
+    elif color.lower().__contains__("white"):
+        pin = WHITE_LED
+    else:
+        pin = 100
+   
+    number = int(request.values['level'])
+   
+    GPIO.output(ORANGE_LED, GPIO.LOW)
+    GPIO.output(WHITE_LED, GPIO.LOW)
+   
+    if number >= 1:
+        if pin == 100:
+            GPIO.output(ORANGE_LED, GPIO.HIGH)
+            GPIO.output(WHITE_LED, GPIO.HIGH)
+        else:
+            GPIO.output(pin, GPIO.HIGH)
+       
+    return "Color: %s Level: %s" % (color, number)
+   
+if __name__ == "__main__":
+    app.run('0.0.0.0', 5300)
