@@ -1,0 +1,24 @@
+Google Home Mini telling a Raspberry Pi 2 to control LEDs.
+Accomplished using IFTTT Webhooks service and a custom Python Webserver running on Rasbian.
+
+This is a basic introduction for myself into this. This will be built upon in the future, but for now it is just a proof of concept.
+
+Links:
+Great tutorial on Flask, and setting up a web server on a Raspberry Pi:
+https://projects.raspberrypi.org/en/p...
+
+You will need to forward a port through your firewall to make this work 
+ on your internal network. That process is different for every brand of router, please refer to your devices manual.
+
+Python Code (used in this video):
+https://pastebin.com/KxqRikND
+
+IFTTT:
+https://ifttt.com
+Create a "this" trigger based on Googe Assistant service
+I used the GA trigger "Say a phrase with both a number and a text ingredient"
+What do you want to say?
+    Set kitchen lights to # and $
+Create a "that" action based on Webhooks service
+URL (replace with your public IP and web server port used by Flask):
+    XXX.XXX.XXX.XXX:YYYY/brightnessColor?led=NumberField&color=TextField
